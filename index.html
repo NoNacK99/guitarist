@@ -1,60 +1,41 @@
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Jazzman</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Page Video with Playlist</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="video-wrapper">
-      <video id="guitar-video" autoplay loop playsinline muted>
-        <source src="Guitarist2.mp4" type="video/mp4" />
-        Ton navigateur ne supporte pas la vidéo.
-      </video>
-      <div class="intro-text">Ferme les yeux, laisse les cordes te raconter une histoire...</div>
-      <button id="fullscreen-btn">⛶</button>
+    <div class="video-background-container">
+        <video autoplay loop muted playsinline id="bg-video" poster="placeholder-poster.jpg">
+            <!-- IMPORTANT: Replace placeholder-video.mp4 with your actual video file -->
+            <source src="placeholder-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-  </div>
 
-  <audio id="bg-music" autoplay loop>
-    <source src="soundtrack.mp3" type="audio/mpeg" />
-  </audio>
-  <audio id="vinyl-sound" autoplay loop>
-    <source src="vinyl-crackle.mp3" type="audio/mpeg" />
-  </audio>
+    <div class="content-overlay">
+        <div id="floating-text-container">
+            <p id="floating-text">Welcome! This text will change.</p>
+        </div>
 
-  <script>
-    // Audio déclenché au clic
-    window.addEventListener('click', () => {
-      const bgMusic = document.getElementById('bg-music');
-      const vinyl = document.getElementById('vinyl-sound');
-      const hint = document.getElementById('audio-hint');
-      if (bgMusic.paused) {
-        bgMusic.volume = 0.5;
-        bgMusic.play().catch(err => console.log("Erreur musique :", err));
-      }
-      if (vinyl.paused) {
-        vinyl.volume = 0.3;
-        vinyl.play().catch(err => console.log("Erreur crépitement :", err));
-      }
-      if (hint) {
-        hint.style.display = "none";
-      }
-    });
+        <div class="playlist-controls">
+            <h2>Messages</h2>
+            <ul id="playlist">
+                <!-- Playlist items: data-text is the message, data-time is optional (in seconds) -->
+                <li data-text="This is the first message for the video." data-time="0">Message 1</li>
+                <li data-text="A new thought appears as you watch." data-time="3">Message 2 (at 3s)</li>
+                <li data-text="Enjoy the looping experience!" data-time="7">Message 3 (at 7s)</li>
+                <li data-text="And one more before it repeats." data-time="10">Message 4 (at 10s)</li>
+            </ul>
+            <div class="nav-buttons">
+                <button id="prev-track">Prev</button>
+                <button id="next-track">Next</button>
+            </div>
+        </div>
+    </div>
 
-    // Plein écran
-    document.getElementById("fullscreen-btn").addEventListener("click", () => {
-      const video = document.getElementById("guitar-video");
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
-    });
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
