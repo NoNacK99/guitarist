@@ -1,41 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Page Video with Playlist</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Jazz Guitar Loop</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="video-background-container">
-        <video autoplay loop muted playsinline id="bg-video" poster="placeholder-poster.jpg">
-            <!-- IMPORTANT: Replace placeholder-video.mp4 with your actual video file -->
-            <source src="placeholder-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+  <!-- Vidéos -->
+  <video id="v0" class="active" autoplay muted loop playsinline>
+    <source src="guitar1.mp4" type="video/mp4" />
+  </video>
+  <video id="v1" autoplay muted loop playsinline>
+    <source src="guitar2.mp4" type="video/mp4" />
+  </video>
+  <video id="v2" autoplay muted loop playsinline>
+    <source src="guitar3.mp4" type="video/mp4" />
+  </video>
 
-    <div class="content-overlay">
-        <div id="floating-text-container">
-            <p id="floating-text">Welcome! This text will change.</p>
-        </div>
+  <!-- Script de rotation -->
+  <script>
+    const videos = [
+      document.getElementById('v0'),
+      document.getElementById('v1'),
+      document.getElementById('v2')
+    ];
+    let current = 0;
 
-        <div class="playlist-controls">
-            <h2>Messages</h2>
-            <ul id="playlist">
-                <!-- Playlist items: data-text is the message, data-time is optional (in seconds) -->
-                <li data-text="This is the first message for the video." data-time="0">Message 1</li>
-                <li data-text="A new thought appears as you watch." data-time="3">Message 2 (at 3s)</li>
-                <li data-text="Enjoy the looping experience!" data-time="7">Message 3 (at 7s)</li>
-                <li data-text="And one more before it repeats." data-time="10">Message 4 (at 10s)</li>
-            </ul>
-            <div class="nav-buttons">
-                <button id="prev-track">Prev</button>
-                <button id="next-track">Next</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+    setInterval(() => {
+      videos[current].classList.remove('active');
+      current = (current + 1) % videos.length;
+      videos[current].classList.add('active');
+    }, 6000); // Change toutes les 6 secondes
+  </script>
 </body>
 </html>
