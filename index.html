@@ -2,34 +2,34 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Jazz Guitar Loop</title>
+  <title>Jazz Loop</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Vidéos -->
-  <video id="v0" class="active" autoplay muted loop playsinline>
-    <source src="guitar1.mp4" type="video/mp4" />
-  </video>
-  <video id="v1" autoplay muted loop playsinline>
-    <source src="guitar2.mp4" type="video/mp4" />
-  </video>
-  <video id="v2" autoplay muted loop playsinline>
-    <source src="guitar3.mp4" type="video/mp4" />
-  </video>
+  <div class="player">
+    <video id="slide0" class="slide active" autoplay muted loop playsinline>
+      <source src="Guitarist1.mp4" type="video/mp4" />
+    </video>
+    <video id="slide1" class="slide" autoplay muted loop playsinline>
+      <source src="Guitarist2.mp4" type="video/mp4" />
+    </video>
+    <img id="slide2" class="slide" src="Guitarist2.gif" alt="Guitarist 2" />
+    <img id="slide3" class="slide" src="Guitarist3.gif" alt="Guitarist 3" />
+  </div>
 
-  <!-- Script de rotation -->
   <script>
-    const videos = [
-      document.getElementById('v0'),
-      document.getElementById('v1'),
-      document.getElementById('v2')
+    const slides = [
+      document.getElementById('slide0'),
+      document.getElementById('slide1'),
+      document.getElementById('slide2'),
+      document.getElementById('slide3')
     ];
     let current = 0;
 
     setInterval(() => {
-      videos[current].classList.remove('active');
-      current = (current + 1) % videos.length;
-      videos[current].classList.add('active');
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
     }, 6000); // Change toutes les 6 secondes
   </script>
 </body>
