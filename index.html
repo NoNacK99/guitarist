@@ -1,72 +1,64 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  overflow: hidden;
-  height: 100%;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jazz Guitar Loop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Lecteur de vidéos et GIFs -->
+  <div class="player">
+    <video id="slide0" class="slide active" autoplay muted loop playsinline>
+      <source src="Guitarist1.mp4" type="video/mp4" />
+    </video>
+    <video id="slide1" class="slide" autoplay muted loop playsinline>
+      <source src="Guitarist2.mp4" type="video/mp4" />
+    </video>
+    <img id="slide2" class="slide" src="Guitarist2.gif" alt="Guitarist 2" />
+    <img id="slide3" class="slide" src="Guitarist3.gif" alt="Guitarist 3" />
+  </div>
 
-.player {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-}
+  <!-- Texte flottant apaisant -->
+  <div class="floating-text">
+    <p>*Ferme les yeux...<br>
+    Le monde peut attendre un peu.<br>
+    Ici, rien ne presse, tout respire.<br>
+    Les cordes racontent ce que les mots n’osent pas.<br>
+    Un soupir, une note, une lumière chaude dans la nuit.<br>
+    Tu es exactement là où tu dois être.<br>
+    Bienvenue dans l'instant.<br>
+    C’est doux, c’est calme, c’est toi.*</p>
+  </div>
 
-/* Vidéos et GIFs */
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  z-index: 0;
-}
+  <!-- Audio d'ambiance -->
+  <audio id="bg-music" autoplay loop>
+    <source src="soundtrack.mp3" type="audio/mpeg" />
+  </audio>
 
-.slide.active {
-  opacity: 1;
-  z-index: 1;
-}
+  <!-- Script de rotation & audio -->
+  <script>
+    const slides = [
+      document.getElementById('slide0'),
+      document.getElementById('slide1'),
+      document.getElementById('slide2'),
+      document.getElementById('slide3')
+    ];
+    let current = 0;
 
-/* Texte flottant avec effet de fondu */
-.floating-text {
-  position: absolute;
-  bottom: 10%;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
-  z-index: 10;
-}
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 6000);
 
-.floating-text p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.4rem;
-  line-height: 2.2rem;
-  font-style: italic;
-  font-family: 'Georgia', serif;
-  max-width: 80%;
-  margin: 0 auto;
-  animation: fadeScroll 35s linear infinite;
-  white-space: pre-line;
-}
-
-@keyframes fadeScroll {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  10% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  90% {
-    opacity: 1;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-}
+    // Déclenchement audio au premier clic
+    window.addEventListener('click', () => {
+      const music = document.getElementById('bg-music');
+      if (music.paused) {
+        music.volume = 0.5;
+        music.play().catch(err => console.log("Lecture bloquée :", err));
+      }
+    });
+  </script>
+</body>
+</html>
