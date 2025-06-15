@@ -59,8 +59,32 @@ video {
   max-width: 100%;
   max-height: 100%;
   border-radius: 10px;
+  animation: slowZoom 60s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
 }
 
 audio {
   display: none;
+}
+
+.intro-text {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  color: #fff;
+  font-size: 1.5rem;
+  opacity: 0;
+  animation: fadeInOut 15s ease-in-out forwards;
+  font-style: italic;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
 }
