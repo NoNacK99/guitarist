@@ -12,6 +12,7 @@ html, body {
   position: relative;
 }
 
+/* Vidéos et GIFs */
 .slide {
   position: absolute;
   top: 0;
@@ -27,4 +28,45 @@ html, body {
 .slide.active {
   opacity: 1;
   z-index: 1;
+}
+
+/* Texte flottant avec effet de fondu */
+.floating-text {
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floating-text p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+  font-style: italic;
+  font-family: 'Georgia', serif;
+  max-width: 80%;
+  margin: 0 auto;
+  animation: fadeScroll 35s linear infinite;
+  white-space: pre-line;
+}
+
+@keyframes fadeScroll {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
 }
