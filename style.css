@@ -1,165 +1,30 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Prevents scrollbars */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  overflow: hidden;
+  height: 100%;
 }
 
-.video-background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Behind other content */
-    overflow: hidden;
+.player {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }
 
-#bg-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cover the area, crop if needed, maintain aspect ratio */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
 }
 
-.content-overlay {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-#floating-text-container {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 25px 40px;
-    border-radius: 12px;
-    margin-bottom: 40px;
-    max-width: 80%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-#floating-text {
-    font-size: 2.5em; /* Adjust as needed */
-    font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(20px);
-    animation: fadeInText 0.8s ease-out forwards;
-}
-
-/* Reusable animation class for text changes */
-.fade-in-text-animation {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInText 0.8s ease-out forwards;
-}
-
-@keyframes fadeInText {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.playlist-controls {
-    background-color: rgba(20, 20, 20, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    max-width: 280px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.playlist-controls h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.3em;
-    color: #eee;
-    text-align: left;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding-bottom: 10px;
-}
-
-#playlist {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 15px 0;
-    max-height: 150px; /* For scrollability if many items */
-    overflow-y: auto;
-}
-
-#playlist li {
-    padding: 10px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-size: 0.95em;
-    color: #ccc;
-}
-
-#playlist li:last-child {
-    border-bottom: none;
-}
-
-#playlist li:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-}
-
-#playlist li.active {
-    background-color: rgba(70, 130, 180, 0.7); /* Steelblue with alpha */
-    color: #fff;
-    font-weight: bold;
-}
-
-.nav-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.playlist-controls button {
-    padding: 10px 18px;
-    background-color: #4CAF50; /* Green */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-    flex-grow: 1; /* Make buttons take available space */
-}
-.playlist-controls button:first-child {
-    margin-right: 10px; /* Space between buttons */
-}
-
-
-.playlist-controls button:hover {
-    background-color: #45a049;
-}
-
-/* Scrollbar styling for playlist (optional, webkit only) */
-#playlist::-webkit-scrollbar {
-    width: 8px;
-}
-#playlist::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.1);
-    border-radius: 10px;
-}
-#playlist::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.3);
-    border-radius: 10px;
-}
-#playlist::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.5);
+.slide.active {
+  opacity: 1;
+  z-index: 1;
 }
