@@ -32,5 +32,33 @@
       slides[current].classList.add('active');
     }, 6000); // Change toutes les 6 secondes
   </script>
+  <audio id="bg-music" autoplay loop>
+  <source src="soundtrack.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+  const slides = [
+    document.getElementById('slide0'),
+    document.getElementById('slide1'),
+    document.getElementById('slide2'),
+    document.getElementById('slide3')
+  ];
+  let current = 0;
+
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 6000);
+
+  // Déclenchement audio sur interaction (pour navigateur qui bloque l'autoplay)
+  window.addEventListener('click', () => {
+    const music = document.getElementById('bg-music');
+    if (music.paused) {
+      music.volume = 0.5;
+      music.play().catch(e => console.log("Lecture bloquée :", e));
+    }
+  });
+</script>
 </body>
 </html>
